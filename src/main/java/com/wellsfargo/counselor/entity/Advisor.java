@@ -1,17 +1,13 @@
 package com.wellsfargo.counselor.entity;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Advisor {
 
     @Id
-    @GeneratedValue()
-    private long advisorId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Explicitly specify the generation strategy
+    private Long advisorId; // Use Long instead of long for compatibility with JPA
 
     @Column(nullable = false)
     private String firstName;
@@ -28,8 +24,8 @@ public class Advisor {
     @Column(nullable = false)
     private String email;
 
+    // Default constructor for JPA
     protected Advisor() {
-
     }
 
     public Advisor(String firstName, String lastName, String address, String phone, String email) {
@@ -40,9 +36,13 @@ public class Advisor {
         this.email = email;
     }
 
+    // Getters and setters
+
     public Long getAdvisorId() {
         return advisorId;
     }
+
+    // No setId() setter for id if it should be read-only
 
     public String getFirstName() {
         return firstName;
